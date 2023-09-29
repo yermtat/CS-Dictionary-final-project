@@ -11,56 +11,59 @@
 //dict.show();
 
 
+int menuItem, dictionaryItem;
+Dictionary dictionary = new Dictionary();
 
-string[] menu =
+string[] startMenu = 
 {
     "Create a new dictionary",
     "Open a dictionary", 
     "Exit"
 };
 
-showMenu(menu);
-
-
-int showMenu(string[] menuName)
+string[] openDictionaryMenu =
 {
-    int menuPos = 0;
+    "Add a word",
+    "Find a word",
+    "Show all words"
+};
 
-    while (true)
+string[] dictionariesMenu;
+
+
+while (true)
+{
+    menuItem = Visual.ShowMenu(startMenu);
+
+    Console.CursorVisible = true;
+
+    switch (menuItem)
     {
-        Console.Clear();
-        Console.CursorVisible = false;
-        menuPos %= menuName.Length;
-        if (menuPos < 0) menuPos = menuName.Length - 1;
+        case 0:
+            
+            Console.Write("\nEnter a languages (f.e. \"Russuan - English\", \"English - Russsian\"): ");
+            dictionary.Type = Console.ReadLine();
 
-        for (int i = 0; i < menuName.Length; i++)
-        {
-            if (i == menuPos)
-            {
-                Console.WriteLine($">> {menuName[i]}");
-            }
-            else
-            {
-                Console.WriteLine($"{menuName[i]}");
-            }
-        }
+            FileOperations.WriteADictionary(dictionary.Type);
+
+            break;
+        case 1:
+            dictionariesMenu = File.ReadAllLines("dictionaries.txt");
+            dictionaryItem = Visual.ShowMenu(dictionariesMenu);
+
+            menuItem = Visual.ShowMenu(openDictionaryMenu);
 
 
-        var keyPressed = Console.ReadKey();
+            break;
+        case 2:
+            Console.WriteLine(dictionary.Type);
+            return;
+            break;
 
-        if (keyPressed.Key == ConsoleKey.W || keyPressed.Key == ConsoleKey.UpArrow)
-        {
-            menuPos--;
-        }
-        else if (keyPressed.Key == ConsoleKey.S || keyPressed.Key == ConsoleKey.DownArrow)
-        {
-            menuPos++;
-        }
-        else if (keyPressed.Key == ConsoleKey.Enter)
-        {
-            return menuPos;
-        }
+
     }
+
 }
+
 
 

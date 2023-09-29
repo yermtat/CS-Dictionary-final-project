@@ -12,12 +12,12 @@ class Dictionary
         _words= new List<Word>();
     }
 
-    public Dictionary(string type, params Word[] words)
-    {
-        Type = type;
-        _words = new List<Word>(words);
+    //public Dictionary(string type, params Word[] words)
+    //{
+    //    Type = type;
+    //    _words = new List<Word>(words);
 
-    }
+    //}
 
     public void AddWord(Word word)
     {

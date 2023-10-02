@@ -27,13 +27,21 @@ static class FileOperations
 
     static public void writeDictionaryCsv(Dictionary dictionary)
     {
-        using FileStream fs = new(dictionary.Type + ".csv", FileMode.OpenOrCreate);
+        using FileStream fs = new(dictionary.Type + ".csv", FileMode.Truncate);
         using var writer = new StreamWriter(fs);
         using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
 
         csv.WriteRecords(dictionary.GetWords());
     }
 
+    static public void WriteWord(Word word)
+    {
+        using FileStream fs = new(word.Meaning + ".csv", FileMode.Create);
+        using var writer = new StreamWriter(fs);
+        using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+
+        csv.WriteRecord(word);
+    }
 }
 
 

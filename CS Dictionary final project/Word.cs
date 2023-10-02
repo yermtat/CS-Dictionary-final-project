@@ -5,8 +5,6 @@
 class Word
 {
     public string Meaning { get; set; }
-    //private List<string> _translation;
-    //public List<string> Translations { get; set; }
 
     private List<string> _translation;
 
@@ -28,11 +26,6 @@ class Word
     {
         _translation = new List<string>();
     }
-    //public Word(string meaning, params string[] translation)
-    //{
-    //    Meaning = meaning;
-    //    _translation = new List<string>(translation);
-    //}
 
     public void SetTranslation(string value)
 	{
@@ -47,7 +40,12 @@ class Word
     public void MakeList()
     {
         if (FullTranslations.Contains(", ")) _translation = FullTranslations.Split(", ").ToList();
-        else _translation.Append(FullTranslations);
+        else _translation.Add(FullTranslations);
+    }
+    
+    public void DeleteTranslation(int index)
+    {
+        _translation.Remove(_translation[index]);
     }
 
     public override string ToString()
